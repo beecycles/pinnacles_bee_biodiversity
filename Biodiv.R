@@ -1,8 +1,10 @@
-#########################################################
-####### Code for Pinnacles Biodiversity Paper ###########
-################# J. Meiners 2017 #######################
+##########################################################
+####### Code for Pinnacles Biodiversity Paper ############
+################# J. Meiners 2017 ########################
 
-setwd("~/Dropbox/Biodiv Paper/Data")
+setwd("~/Dropbox/Data")
+library(dplyr)
+library(plyr)
 
 # load data
 Prj12 = read.csv("Project12.csv", header = TRUE)
@@ -44,14 +46,15 @@ unique(Y11$JD_date) # 58
 unique(Y12$JD_date) # 53
 
 # Number of species
-unique(Y88$SpID) # 1
-unique(Y96$SpID) # 174
-unique(Y97$SpID) # 304
-unique(Y98$SpID) # 321
-unique(Y99$SpID) # 222
-unique(Y02$SpID) # 155
-unique(Y11$SpID) # 298
-unique(Y12$SpID) # 309
+U88 = as.data.frame(unique(Y88$SpID)) # 1
+U96 = as.data.frame(unique(Y96$SpID)) # 174
+U97 = as.data.frame(unique(Y97$SpID)) # 304
+U98 = as.data.frame(unique(Y98$SpID)) # 321
+U99 = as.data.frame(unique(Y99$SpID)) # 222
+U02 = as.data.frame(unique(Y02$SpID)) # 155
+U11 = as.data.frame(unique(Y11$SpID)) # 298
+U12 = as.data.frame(unique(Y12$SpID)) # 309
+SpYr = rbind()
 
 # Specimen totals
 sum(Y88$larger) # 1
@@ -71,6 +74,62 @@ sum(sum(Y99$M) + sum(Y99$F)) # 7082
 sum(sum(Y02$M) + sum(Y02$F)) # 6534
 sum(sum(Y11$M) + sum(Y11$F)) # 18536
 sum(sum(Y12$M) + sum(Y12$F)) # 27719
+
+
+## Figure 2: Barplot comparisons across years
+####### Fig 2a
+## Calculate how many years each species was collected
+Species_years = read.csv("~/Dropbox/Biodiv Paper/Pinnacles_Bee_Biodiversity/Species_list.csv", header = TRUE)
+Species_years = subset(Species_years, Num_years != "NA", select = c("Family", "Species", "Num_years"))
+## Group species by family and number of years recorded
+fam_years = Species_years %>%
+  dplyr::group_by(Family, Num_years) %>%
+  dplyr::summarise(count = n())
+## Calculate number of species per family
+fam_num = Species_years %>%
+  dplyr::group_by(Family) %>%
+  dplyr::summarise(species_per_family = n())
+## Coerce into crostab
+library(reshape2)
+spyears <- dcast(fam_years, Family~Num_years, value.var="count")
+library(tidyverse)
+spyears = spyears %>% remove_rownames %>% column_to_rownames(var="Family")
+spyears[is.na(spyears)] <- 0
+
+quartz(width = 9, height = 6)
+par(mar=c(5,4.5,5.5,4)) 
+###### Side by side barplot #######
+library(wesanderson)
+spyears = as.matrix(spyears)
+names_leg=c("Andrenidae (N = 97)", "Apidae (N = 122)" , "Colletidae (N = 21)", "Halictidae (N = 60)", "Megachilidae (N = 148)", "Melittidae (N = 2)")
+barplot(spyears, beside = TRUE, col = wes_palette(n=6, name="GrandBudapest"))
+mtext(side = 2, line = 2.75, text = "Number of species", font = 2)
+mtext(side = 1, line = 3.75, text = "Number of years a species was present", font = 2)
+legend("top", names_leg, pch=15, col=color.vec, bty="n", title = "Bee Families")
+
+######## Fig 2b
+Prop_specyear <- read.csv("SpeciesinFamily.csv", header = TRUE, row.names = 1)
+
+years = c("All96", "New97", "New98", "New99", "New02", "New11", "New12")
+
+prop_years = Prop_specyear[,years]/rowSums(Prop_specyear[,years])
+totals = rowSums(Prop_specyear[,years])
+
+quartz(width = 9, height = 6)
+par(mar=c(5,4.5,5.5,4)) 
+color.vec = c("cadetblue1", "cadetblue2", "cadetblue3", "cadetblue4", "chartreuse2", "coral", "coral3")
+bp = barplot(t(prop_years), las=1, col=color.vec,
+             names=c("Andrenidae \n (N = 107)", "Apidae \n (N = 121)" , "Colletidae \n (N = 22)", "Halictidae \n (N = 76)", "Megachilidae \n (N = 151)", "Melittidae \n (N = 2)"))
+bp
+mtext(side = 2, line = 2.75, text = "Proportion of total species collected", font = 2)
+mtext(side = 1, line = 3.75, text = "Bee Family \n (N = total species collected)", font = 2)
+
+
+years_leg = c("1996", "1997", "1998", "1999", "2002", "2011", "2012")
+legend(5, 1.25, legend=years_leg[6:7], bty = "n",  xpd=NA, ncol=1, pch=22, pt.bg=color.vec[6:7], pt.cex=2.5, inset=c(-0.15) ,text.font = 1, title = "Current Collection Years")
+legend(3.5,1.25, legend=years_leg[5], bty = "n", xpd=NA, ncol=1, pch=22, pt.bg=color.vec[5], pt.cex=2.5, inset=c(-0.15) ,text.font = 1, title = "Bowl Study")
+legend(0.3,1.25, legend=years_leg[1:4], bty = "n", xpd=NA, ncol=2, pch=22, pt.bg=color.vec[1:4], pt.cex=2.5, inset=c(-0.15) ,text.font = 1, title = "Early Museum Collection Years")
+
 
 ## Figure 4: Dominance Graphs
 library(ggplot2)
@@ -100,34 +159,85 @@ box(which="plot")
 
 
 
-#### Figure 6: Study comparison (Data from Table S1)
+#### Figure 6: Study comparison (Data from Table S1) ## Clean this up to only what is necessary for fig.
 
-# load data
-compare = read.csv("Study_comparison.csv", header = TRUE)
-dim(compare)
-head(compare)
-compare$Area = as.integer(compare$Area)
+surveys = read.csv("Study_comparison.csv", header = TRUE) # may need to add 'stringsAsFactors = FALSE' if not importing correctly
+names(surveys)
+dim(surveys)
 
-library(ggplot2)
+pinn_col = rep("black", times=length(surveys[,1]))
+pinn_col[which(surveys$Study=="Pinnacles National Park, CA")]="red"
 
-quartz(width=10, height=6)
-ggplot(compare, aes(Genera, Species)) +
-  geom_point(aes(size=Area)) +
-  geom_text(aes(label=Study),hjust=0, vjust=0)
+plot(surveys$Species ~ surveys$Area, las=1, pch=19, col = pinn_col)
+lin_mod = lm(surveys$Species ~ surveys$Area)
+abline(lin_mod)
+text("topright", paste("R2=",round(summary(lin_mod)$ r.squared, digits=3), sep=""))
+text(topright, paste("p-value=",round(summary(lin_mod)$ coefficients[[2,4]], digits=3), sep=""))
+mtext("Linear model", line = 1, font=2)
 
-quartz(width=6, height=6)
-ggplot(compare, aes(Area, Species)) +
-  geom_point(size=0.9) +
-  geom_text(aes(label=Study), size=3, hjust=c(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0), vjust=c(0,0,0,0,0,1,0,0,-1,1,0,1,0,1,0,0,0,0)) +
-  xlim(-100, 8000)
+plot(bee$Species ~ log(bee$Area), las=1, pch=19, col = pinn_col)
+log_mod = lm(bee$Species ~ log(bee$Area))
+abline(log_mod)
+text(x=2.5, y=600, paste("R2=",round(summary(log_mod)$ r.squared, digits=3), sep=""))
+text(x=2.5, y=550, paste("p-value=",round(summary(log_mod)$ coefficients[[2,4]], digits=3), sep=""))
+mtext("Logarithmic model", line = 1, font=2)
 
-quartz(width=6, height=6)
-ggplot(compare, aes(log10(Area), log10(Species))) +
-  geom_point(size=0.9) +
-  geom_text(aes(label=Study), size=3, hjust=0, vjust=c(0,0,0,0,0,1,0,0,-1,1,0,1,0,1,0,0,0,0)) +
-  xlim(0.5, 4.8) +
-  stat_smooth()
+plot(log(surveys$Species) ~ log(surveys$Area), las=1, pch=19, col = pinn_col)
+power_mod = lm(log(surveys$Species) ~ log(surveys$Area))
+abline(power_mod)
+text(x=2.5, y=6.25, paste("R2=",round(summary(power_mod)$ r.squared, digits=3), sep=""))
+text(x=2.5, y=6.1, paste("p-value=",round(summary(power_mod)$ coefficients[[2,4]], digits=3), sep=""))
+mtext("power-law model", line = 1, font=2)
 
-tiff(filename = "SpeciesArea.tiff" , units = "in", compression = "lzw", res = 150, width = 6, height = 6)
-dev.off()
+##Look for largest residual
+plot(residuals(power_mod) ~ log(surveys$Area), las=1, pch=19, ylim=c(-max(abs(residuals(power_mod))),  max(abs(residuals(power_mod))) ), col = pinn_col)
+abline(h=0, col="gray")
+abline(h = c(-residuals(power_mod)[which(surveys$Study=="Pinnacles National Park, CA")], residuals(power_mod)[which(surveys$Study=="Pinnacles National Park, CA")]), lty=2, col="darkred")
+
+##Convert to a percentage of predicted. 
+percent_deviation_A = (surveys$Species - exp(predict(power_mod)))/exp(predict(power_mod))*100
+sort_order = rev(order(percent_deviation_A))
+percent_deviation = percent_deviation_A[sort_order]
+bar_col = rep("gray20", times = length(surveys[,1]))
+bar_col[which(percent_deviation>0)]="gray80"
+
+beta = power_mod$coefficients
+area_range = seq(from = min(surveys$Area), to = max(surveys$Area), length.out=300)
+pred_species = exp(beta[1]+beta[2]*log(area_range))
+
+quartz(width=11, height=6)
+par(mfrow=c(1,2))
+par(mar=c(5.5, 5, 2, 2)+0.1)
+surveys_col = rep("gray20", times = length(surveys[,1]))
+surveys_col[which(percent_deviation_A>0)]="gray80"
+plot(surveys$Species ~ surveys$Area, las=1, pch=21, bg = surveys_col, ylab="Number of species", xlab="Area (sq. km.)")
+points(x = area_range, y = pred_species, type='l', lwd=2)
+points(x = area_range[which(surveys$Study=="Pinnacles National Park, CA")],
+       y = pred_species[which(surveys$Study=="Pinnacles National Park, CA")],
+       pch=21, cex=3)
+
+par(mar=c(15, 6, 2, 2)+0.1)
+barplot(height = percent_deviation, las=2, names.arg = surveys$Study[sort_order], yaxs = 'r', ylab = "Observed relative to predicted\nspecies per area (%)", col = bar_col)
+abline(h=0)
+box(which="plot")
+legend("topright", legend = c("> predicted", "< predicted"), pch=22, pt.bg = c("gray80", "gray20"), pt.cex=2, inset=0.05, bty='n')
+axis(side = 1, at = seq(from = 0.75, by = 1.2, length.out=length(surveys[,1])), labels=FALSE)
+
+par(mfrow=c(1,2))
+par(mar=c(5.5, 5, 2, 2)+0.1)
+surveys_col = rep("gray20", times = length(surveys[,1]))
+surveys_col[which(percent_deviation_A>0)]="gray80"
+plot(log(surveys$Species) ~ log(surveys$Area), las=1, pch=21, bg = surveys_col, ylab="log_e(Number of species)", xlab="log_e(Area (sq. km.))")
+points(x = log(surveys$Area), y = predict(power_mod), type='l', lwd=2)
+points(x = log(surveys$Area)[which(surveys$Study=="Pinnacles National Park, CA")],
+       y = log(surveys$Species)[which(surveys$Study=="Pinnacles National Park, CA")],
+       pch=21, cex=3)
+
+par(mar=c(15, 6, 2, 2)+0.1)
+barplot(height = percent_deviation, las=2, names.arg = surveys$Study[sort_order], yaxs = 'r', ylab = "Observed relative to predicted\nspecies per area (%)", col = bar_col)
+abline(h=0)
+box(which="plot")
+legend("topright", legend = c("> predicted", "< predicted"), pch=22, pt.bg = c("gray80", "gray20"), pt.cex=2, inset=0.05, bty='n')
+axis(side = 1, at = seq(from = 0.75, by = 1.2, length.out=length(surveys[,1])), labels=FALSE)
+
 
