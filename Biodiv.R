@@ -46,15 +46,14 @@ unique(Y11$JD_date) # 58
 unique(Y12$JD_date) # 53
 
 # Number of species
-U88 = as.data.frame(unique(Y88$SpID)) # 1
-U96 = as.data.frame(unique(Y96$SpID)) # 174
-U97 = as.data.frame(unique(Y97$SpID)) # 304
-U98 = as.data.frame(unique(Y98$SpID)) # 321
-U99 = as.data.frame(unique(Y99$SpID)) # 222
-U02 = as.data.frame(unique(Y02$SpID)) # 155
-U11 = as.data.frame(unique(Y11$SpID)) # 298
-U12 = as.data.frame(unique(Y12$SpID)) # 309
-SpYr = rbind()
+unique(Y88$SpID) # 1
+unique(Y96$SpID) # 174
+unique(Y97$SpID) # 304
+unique(Y98$SpID) # 321
+unique(Y99$SpID) # 222
+unique(Y02$SpID) # 155
+unique(Y11$SpID) # 298
+unique(Y12$SpID) # 309
 
 # Specimen totals
 sum(Y88$larger) # 1
