@@ -75,11 +75,11 @@ sum(sum(Y02$M) + sum(Y02$F)) # 6534
 sum(sum(Y11$M) + sum(Y11$F)) # 18536
 sum(sum(Y12$M) + sum(Y12$F)) # 27719
 
-
+setwd("~/Dropbox/Biodiv Paper/Pinnacles_Bee_Biodiversity")
 ## Figure 2: Barplot comparisons across years
 ####### Fig 2a
 ## Calculate how many years each species was collected
-Species_years = read.csv("~/Dropbox/Biodiv Paper/Pinnacles_Bee_Biodiversity/Species_list.csv", header = TRUE)
+Species_years = read.csv("Species_list.csv", header = TRUE)
 Species_years = subset(Species_years, Num_years != "NA", select = c("Family", "Species", "Num_years"))
 ## Group species by family and number of years recorded
 fam_years = Species_years %>%
@@ -99,17 +99,16 @@ spyears[is.na(spyears)] <- 0
 quartz(width = 9, height = 6)
 par(mar=c(5,4.5,5.5,4)) 
 ###### Side by side barplot #######
-library(wesanderson)
+library(RColorBrewer)
 spyears = as.matrix(spyears)
 names_leg=c("Andrenidae (N = 97)", "Apidae (N = 122)" , "Colletidae (N = 21)", "Halictidae (N = 60)", "Megachilidae (N = 148)", "Melittidae (N = 2)")
-barplot(spyears, beside = TRUE, col = wes_palette(n=6, name="GrandBudapest"))
+barplot(spyears, beside = TRUE, col=brewer.pal(n = 6, name = "Set3"))
 mtext(side = 2, line = 2.75, text = "Number of species", font = 2)
 mtext(side = 1, line = 3.75, text = "Number of years a species was present", font = 2)
-legend("top", names_leg, pch=15, col=color.vec, bty="n", title = "Bee Families")
+legend("top", names_leg, pch=15, col=brewer.pal(n = 6, name = "Set3"), bty="n", title = "Bee Families")
 
 ######## Fig 2b
 Prop_specyear <- read.csv("SpeciesinFamily.csv", header = TRUE, row.names = 1)
-
 years = c("All96", "New97", "New98", "New99", "New02", "New11", "New12")
 
 prop_years = Prop_specyear[,years]/rowSums(Prop_specyear[,years])
@@ -117,13 +116,11 @@ totals = rowSums(Prop_specyear[,years])
 
 quartz(width = 9, height = 6)
 par(mar=c(5,4.5,5.5,4)) 
-color.vec = c("cadetblue1", "cadetblue2", "cadetblue3", "cadetblue4", "chartreuse2", "coral", "coral3")
-bp = barplot(t(prop_years), las=1, col=color.vec,
+color.vec = brewer.pal(n = 7, name = "YlGnBu")
+barplot(t(prop_years), las=1, col=color.vec,
              names=c("Andrenidae \n (N = 107)", "Apidae \n (N = 121)" , "Colletidae \n (N = 22)", "Halictidae \n (N = 76)", "Megachilidae \n (N = 151)", "Melittidae \n (N = 2)"))
-bp
 mtext(side = 2, line = 2.75, text = "Proportion of total species collected", font = 2)
 mtext(side = 1, line = 3.75, text = "Bee Family \n (N = total species collected)", font = 2)
-
 
 years_leg = c("1996", "1997", "1998", "1999", "2002", "2011", "2012")
 legend(5, 1.25, legend=years_leg[6:7], bty = "n",  xpd=NA, ncol=1, pch=22, pt.bg=color.vec[6:7], pt.cex=2.5, inset=c(-0.15) ,text.font = 1, title = "Current Collection Years")
