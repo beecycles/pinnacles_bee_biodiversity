@@ -95,6 +95,8 @@ library(tidyverse)
 spyears = spyears %>% remove_rownames %>% column_to_rownames(var="Family")
 spyears[is.na(spyears)] <- 0
 
+# par(mfrow=c(2,1))
+# quartz(width = 4.5, height = 6)
 quartz(width = 9, height = 6)
 par(mar=c(5,4.5,5.5,4)) 
 ###### Side by side barplot #######
