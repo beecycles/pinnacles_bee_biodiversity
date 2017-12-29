@@ -84,10 +84,15 @@ View(Clarungi11)
 dim(Clarungi11) # 245 2
 sum(Clarungi11$larger) # 247
 
-Eriofasc12 = subset(Y12, CONCATENATE == "Eriogonum fasciculatum", select = c("larger", "CONCATENATE"))
+Eriofasc12 = subset(Y12, CONCATENATE == "Eriogonum fasciculatum var.foliolosum", select = c("larger", "CONCATENATE"))
 View(Eriofasc12)
-dim(Eriofasc12)
-sum(Eriofasc12$larger)
+dim(Eriofasc12) # 626 2
+sum(Eriofasc12$larger) # 644
+
+## Check locations of species new in 2011 or 2012
+Loc = subset(Prj57, GenusName == "Andrena" & Subgenus == "(Hesperandrena)" & Species != "sp.", select = c("GenusName", "Species", "Location_Name", "Location_Desc", "larger", "Yr0"))
+View(Loc)
+unique(Loc$Species)
 
 setwd("~/Dropbox/Biodiv Paper/Pinnacles_Bee_Biodiversity")
 ## Figure 2: Barplot comparisons across years
