@@ -90,7 +90,7 @@ dim(Eriofasc12) # 626 2
 sum(Eriofasc12$larger) # 644
 
 ## Check locations of species new in 2011 or 2012
-Loc = subset(Prj57, GenusName == "Andrena" & Subgenus == "(Hesperandrena)" & Species != "sp.", select = c("GenusName", "Species", "Location_Name", "Location_Desc", "larger", "Yr0"))
+Loc = subset(Prj57, GenusName == "Stelis" & Species == "chemsaki", select = c("GenusName", "Species", "Location_Name", "Location_Desc", "larger", "Yr0"))
 View(Loc)
 unique(Loc$Species)
 
