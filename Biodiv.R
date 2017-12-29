@@ -5,6 +5,10 @@
 setwd("~/Dropbox/Data")
 library(dplyr)
 library(plyr)
+library(RColorBrewer)
+library(tidyverse)
+library(reshape2)
+library(ggplot2)
 
 # load data
 Prj12 = read.csv("Project12.csv", header = TRUE)
@@ -74,6 +78,17 @@ sum(sum(Y02$M) + sum(Y02$F)) # 6534
 sum(sum(Y11$M) + sum(Y11$F)) # 18536
 sum(sum(Y12$M) + sum(Y12$F)) # 27719
 
+## Calculate bee totals for most-visited plants
+Clarungi11 = subset(Y11, CONCATENATE == "Clarkia unguiculata", select = c("larger", "CONCATENATE"))
+View(Clarungi11)
+dim(Clarungi11) # 245 2
+sum(Clarungi11$larger) # 247
+
+Eriofasc12 = subset(Y12, CONCATENATE == "Eriogonum fasciculatum", select = c("larger", "CONCATENATE"))
+View(Eriofasc12)
+dim(Eriofasc12)
+sum(Eriofasc12$larger)
+
 setwd("~/Dropbox/Biodiv Paper/Pinnacles_Bee_Biodiversity")
 ## Figure 2: Barplot comparisons across years
 ####### Fig 2a
@@ -89,37 +104,37 @@ fam_num = Species_years %>%
   dplyr::group_by(Family) %>%
   dplyr::summarise(species_per_family = n())
 ## Coerce into crostab
-library(reshape2)
 spyears <- dcast(fam_years, Family~Num_years, value.var="count")
-library(tidyverse)
 spyears = spyears %>% remove_rownames %>% column_to_rownames(var="Family")
 spyears[is.na(spyears)] <- 0
 
 # par(mfrow=c(2,1))
 # quartz(width = 4.5, height = 6)
-quartz(width = 9, height = 6)
-par(mar=c(5,4.5,5.5,4)) 
+quartz(width = 9, height = 5)
+# par(mar=c(5,4.5,5.5,4)) 
 ###### Side by side barplot #######
-library(RColorBrewer)
+tiff(filename = "Biodiv_Fig2a.tiff", units = "in", compression = "lzw", res = 300, width = 9, height = 5)
 spyears = as.matrix(spyears)
 names_leg=c("Andrenidae (N = 97)", "Apidae (N = 122)" , "Colletidae (N = 21)", "Halictidae (N = 60)", "Megachilidae (N = 148)", "Melittidae (N = 2)")
 barplot(spyears, beside = TRUE, col=brewer.pal(n = 6, name = "Set3"))
 mtext(side = 2, line = 2.75, text = "Number of species", font = 2)
 mtext(side = 1, line = 3.75, text = "Number of years a species was present", font = 2)
-legend("top", names_leg, pch=15, col=brewer.pal(n = 6, name = "Set3"), bty="n", title = "Bee Families")
+legend("top", names_leg, pch=15, cex = 0.9, col=brewer.pal(n = 6, name = "Set3"), bty="n", title = "Bee Families")
+dev.off() # run this line after figure code to finish saving out figure to file
 
 ######## Fig 2b
-Prop_specyear <- read.csv("SpeciesinFamily.csv", header = TRUE, row.names = 1)
+Prop_specyear <- read.csv("SpeciesinFamily_450.csv", header = TRUE, row.names = 1)
 years = c("All96", "New97", "New98", "New99", "New02", "New11", "New12")
 
 prop_years = Prop_specyear[,years]/rowSums(Prop_specyear[,years])
 totals = rowSums(Prop_specyear[,years])
 
-quartz(width = 9, height = 6)
-par(mar=c(5,4.5,5.5,4)) 
+quartz(width = 9, height = 5)
+# par(mar=c(5,4.5,5.5,4)) 
+tiff(filename = "Biodiv_Fig2b.tiff", units = "in", compression = "lzw", res = 300, width = 9, height = 5)
 color.vec = brewer.pal(n = 7, name = "YlGnBu")
 barplot(t(prop_years), las=1, col=color.vec,
-             names=c("Andrenidae \n (N = 107)", "Apidae \n (N = 121)" , "Colletidae \n (N = 22)", "Halictidae \n (N = 76)", "Megachilidae \n (N = 151)", "Melittidae \n (N = 2)"))
+             names=c("Andrenidae \n (N = 97)", "Apidae \n (N = 122)" , "Colletidae \n (N = 21)", "Halictidae \n (N = 60)", "Megachilidae \n (N = 148)", "Melittidae \n (N = 2)"))
 mtext(side = 2, line = 2.75, text = "Proportion of total species collected", font = 2)
 mtext(side = 1, line = 3.75, text = "Bee Family \n (N = total species collected)", font = 2)
 
@@ -127,11 +142,9 @@ years_leg = c("1996", "1997", "1998", "1999", "2002", "2011", "2012")
 legend(5, 1.25, legend=years_leg[6:7], bty = "n",  xpd=NA, ncol=1, pch=22, pt.bg=color.vec[6:7], pt.cex=2.5, inset=c(-0.15) ,text.font = 1, title = "Current Collection Years")
 legend(3.5,1.25, legend=years_leg[5], bty = "n", xpd=NA, ncol=1, pch=22, pt.bg=color.vec[5], pt.cex=2.5, inset=c(-0.15) ,text.font = 1, title = "Bowl Study")
 legend(0.3,1.25, legend=years_leg[1:4], bty = "n", xpd=NA, ncol=2, pch=22, pt.bg=color.vec[1:4], pt.cex=2.5, inset=c(-0.15) ,text.font = 1, title = "Early Museum Collection Years")
-
+dev.off() # run this line after figure code to finish saving out figure to file
 
 ## Figure 4: Dominance Graphs
-library(ggplot2)
-
 dominance = read.csv("Dominance_Genera.csv", header = TRUE, row.names = 1)
 
 10^(seq(from=-1, to=2, by=1))
