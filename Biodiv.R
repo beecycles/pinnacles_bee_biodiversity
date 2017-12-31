@@ -94,6 +94,27 @@ Loc = subset(Prj57, GenusName == "Stelis" & Species == "chemsaki", select = c("G
 View(Loc)
 unique(Loc$Species)
 
+## Calculate min and max bees collected per plot sample
+plotsamp11 = subset(Prj57, Yr0 == "2011" & InfoFlag == "6" | InfoFlag == "9" | InfoFlag == "11", select = c("larger", "Location_Name", "Yr0", "JD_date"))
+dim(plotsamp11)
+plot11 = plotsamp11 %>%
+  dplyr::group_by(JD_date) %>%
+  dplyr::summarise(beecount = sum(larger))
+View(plot11)
+summary(plot11) # min = 1, max = 2088, mean = 368
+stats::sd(plot11$beecount) # 398
+hist(plot11$beecount)
+
+plotsamp12 = subset(Prj57, Yr0 == "2012" & InfoFlag == "6" | InfoFlag == "9" | InfoFlag == "11", select = c("larger", "Location_Name", "Yr0", "JD_date"))
+dim(plotsamp12)
+plot12 = plotsamp12 %>%
+  dplyr::group_by(JD_date) %>%
+  dplyr::summarise(beecount = sum(larger))
+View(plot12)
+summary(plot12) # min = 1, max = 1317, mean = 370
+stats::sd(plot12$beecount) # 380
+hist(plot12$beecount)
+
 setwd("~/Dropbox/Biodiv Paper/Pinnacles_Bee_Biodiversity")
 ## Figure 2: Barplot comparisons across years
 ####### Fig 2a
