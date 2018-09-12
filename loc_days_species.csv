@@ -1,0 +1,123 @@
+Plot,Category,NewLands,Sample Location,Latitude,Longitude,Days Sampled,Bee Species Richness
+Alluvial,Plot,New,Upper McCabe Alluvial (P1),36.5081,-121.156,18,118
+BlueOak,Plot,,High Peaks BOW (P10),36.4907,-121.183,15,139
+Alluvial,Plot,New,Lower McCabe Alluvial (P2),36.503,-121.156,18,128
+Alluvial,Plot,,Peaks View Alluvial (P3),36.4802,-121.16,17,161
+LiveOak,Plot,,South Wilderness LOW (P4),36.4683,-121.156,17,155
+BlueOak,Plot,New,Needlegrass BOW (P5),36.5091,-121.12,15,156
+LiveOak,Plot,New,Needlegrass LOW (P6),36.509,-121.129,15,146
+BlueOak,Plot,,West Gate BOW (P7),36.4747,-121.227,15,133
+Grassland,Plot,,Double Gates Grassland (P8),36.4858,-121.232,15,107
+Grassland,Plot,,W. North Wilderness Grassland (P9),36.4949,-121.211,16,157
+,Recent,New,First_Canyon_North_of_E_Hwy146_start,36.51169,-121.13801,1,16
+,Recent,,A02,36.47742,-121.22212,3,3
+,Recent,,A03,36.47752,-121.22342,3,5
+,Recent,,A04,36.4772,-121.22346,3,1
+,Recent,,A05,36.47817,-121.22144,3,1
+,Recent,,A06,36.47724,-121.22346,3,2
+,Recent,,A07,36.47672,-121.22338,3,1
+,Recent,,A08,36.47824,-121.22212,3,2
+,Recent,,A09,36.47804,-121.22136,3,1
+,Recent,,A10,36.47701,-121.22341,3,2
+,Recent,,A11,36.47739,-121.22365,3,2
+,Recent,,A14,36.47741,-121.22345,3,2
+,Recent,,A16,36.47748,-121.22229,3,2
+,Recent,,A17,36.47747,-121.22348,3,10
+,Recent,,A18,36.47711,-121.22246,3,4
+,Recent,,A20,36.47758,-121.22315,3,1
+,Recent,,A21,36.47811,-121.22143,3,6
+,Bowls,,"Airstrip, 2002 & 2012",36.51168,-121.13539,15,41
+,Recent,,B01,36.51379,-121.18587,3,2
+,Recent,,B02,36.51403,-121.18561,3,9
+,Recent,,B03,36.51384,-121.18595,3,1
+,Recent,,B04,36.51417,-121.1854,3,1
+,Recent,,B05,36.51398,-121.18572,3,2
+,Recent,,B06,36.51414,-121.18542,3,2
+,Recent,,B07,36.51391,-121.18564,3,2
+,Recent,,B08,36.51373,-121.18575,3,1
+,Recent,,B10,36.51401,-121.1855,3,3
+,Recent,,B12,36.51407,-121.18566,3,3
+,Recent,,B13,36.51423,-121.18532,3,1
+,Recent,,B14,36.51421,-121.18511,3,2
+,Recent,,B16,36.51351,-121.18608,3,5
+,Recent,,B17,36.51377,-121.18597,3,9
+,Recent,,B18,36.5138,-121.18609,3,3
+,Recent,,B19,36.51422,-121.18547,3,12
+,Recent,,B20,36.51428,-121.1852,3,7
+,Recent,,B21,36.51429,-121.18504,3,11
+,Recent,,Bear_Gulch_Headquarters,36.48111,-121.18162,1,1
+,Recent,,Bear_Gulch_Reservoir,36.47209,-121.18748,1,13
+,Recent,,Bear_Gulch_Upper_lot_trailhead,36.47813,-121.18393,1,5
+,Recent,,C01,36.48644,-121.21497,3,1
+,Recent,,C02,36.48643,-121.21495,3,1
+,Recent,,C03,36.48737,-121.21507,3,6
+,Recent,,C05,36.48589,-121.21454,3,2
+,Recent,,C07,36.48594,-121.21444,3,1
+,Recent,,C12,36.48737,-121.21505,3,4
+,Recent,,C15,36.4865,-121.21471,3,1
+,Recent,,C16,36.48629,-121.21477,3,9
+,Recent,,C17,36.48637,-121.21491,3,15
+,Recent,,C18,36.48557,-121.2146,3,10
+,Recent,,C19,36.48738,-121.21533,3,14
+,Recent,,C20,36.48634,-121.21495,3,6
+,Recent,,C21,36.48593,-121.2145,3,7
+,Bowls,,"Campground, 2002 & 2012",36.49494,-121.14568,15,52
+,Recent,New,Canyon_East_of_Plot_1,36.50917,-121.15434,1,19
+,Recent,New,Canyon_West_of_Plot_2,36.50295,-121.16031,1,5
+,Recent,,Chalone Picnic area,36.492,-121.171,2,8
+,Recent,,Chalone_Peak_Tr_midpoint,36.46018,-121.1864,1,12
+,Recent,,Condor Gulch,36.484,-121.1859,1,3
+,Recent,,Condor_Gulch_tr_bottom,36.48147,-121.18153,1,4
+,Recent,,Double_Gates_dirt_road,36.48664,-121.23161,1,3
+,Bowls,,"Entrance Meadow, 2002 & 2012",36.48728,-121.15386,17,48
+,Recent,,Grassy_Canyon_rd_bottom,36.47572,-121.14944,1,21
+,Recent,,Grassy_Canyon_Rd_start_low,36.47889,-121.15657,1,4
+,Recent,,Grassy_Canyon_rd_top_facility,36.48594,-121.14032,1,16
+,Recent,,High_Peaks_tr_above_plot_start,36.48961,-121.18571,5,32
+,Recent,,High_Peaks_tr_jct_Condor_Gulch_tr,36.48988,-121.19128,1,5
+,Recent,,High_Peaks_tr_low_early_start,36.49229,-121.18073,6,47
+,Recent,,High_Peaks_tr_low_late_start,36.49104,-121.18006,1,19
+,Recent,,Hillside_north_of_High_Peaks_plot,36.49254,-121.18343,3,22
+,Recent,,Hillside_south_of_High_Peaks_plot,36.48891,-121.18265,3,26
+,Recent,,Hillside_southeast_of_High_Peaks_plot,36.48847,-121.18111,2,22
+,Recent,,Jawbone_Canyon_jct_Hwy146,36.48689,-121.21359,2,10
+,Recent,,Juniper_Canyon_tr_start,36.49113,-121.20841,7,67
+,Recent,,Lab_Area_E_Dorms,36.49199,-121.17072,2,6
+,Recent,,N_Chalone_Peak_Trail_point,36.46128,-121.19347,1,3
+,Recent,,Rose_Canyon,36.50375,-121.13632,1,22
+,Recent,New,Second_Canyon_N_of_Hwy146(Chia_Canyon),36.50707,-121.14282,1,4
+,Recent,,W_North_Wilderness_tr_start,36.49836,-121.21423,5,24
+,Recent,,West_side_Ranger_Station,36.49063,-121.2092,1,4
+,Recent,,West_side_Station_trailsloop,36.49268,-121.20955,4,28
+,Early,,NEED TO DOUBLE CHECK,36.4774,-121.1941,1,1
+,Early,,uop,36.5058,-121.1912,4,48
+,Early,,"""Old Pinn""",36.4962,-121.1733,1,9
+,Early,,1,36.4752,-121.1526,2,22
+,Early,,bv,36.4917,-121.1712,4,37
+,Early,,NEED TO CHECK,36.4814,-121.1965,1,2
+,Early,,NEED TO CHECK,36.4819,-121.186,1,1
+,Early,,oldb,36.4715,-121.1963,5,82
+,Early,,pt-nb-ch,36.4733,-121.1515,4,58
+,Early,,pt-nb-gr,36.472,-121.1525,3,54
+,Early,,pt-nb-wbo,36.4706,-121.1521,3,64
+,Early,,pt-ob-ch,36.4733,-121.1515,2,14
+,Early,,pt-ob-nf,36.4703,-121.197,2,37
+,Early,,pt-ob-rip,36.4713,-121.1961,2,58
+,Early,,pt-ob-sf,36.47216,-121.1951,5,53
+,Early,,pt-op,36.504,-121.1985,4,86
+,Early,,pt-swschap-sf,36.4743,-121.2242,4,27
+,Early,,pt-swt,36.4713,-121.1608,2,32
+,Early,,pt-wchap-ch1,36.4874,-121.2308,4,31
+,Early,,pt-wchap-ch2,36.4938,-121.2313,4,35
+,Early,,pt-wchap-ch3,36.4918,-121.2328,3,28
+,Early,,res-burn,36.4721,-121.1921,4,59
+,Early,,STILL NEED TO CHECK,36.4819,-121.186,1,1
+,Early,,STILL NEED TO FIND,36.46663,-121.17603,1,1
+,Early,,STILL NEED TO FIND,36.47,-121.19,1,1
+,Early,,STILL NEED TO FIND,36.47524,-121.18742,2,8
+,Early,,ushp,36.4809,-121.1967,3,57
+,Early,,wchap,36.4886,-121.2205,1,5
+,Early,,wnwt,36.501,-121.2178,1,34
+,Early,,pt-wchap-ch?,36.3489,-121.322,2,19
+,Early,,pt-swschap-nf,36.4747,-121.525,4,29
+,Early,,ehp1,36.4843,-121.1852,1,4

@@ -111,9 +111,13 @@ plot12 = plotsamp12 %>%
   dplyr::group_by(JD_date) %>%
   dplyr::summarise(beecount = sum(larger))
 View(plot12)
-summary(plot12) # min = 1, max = 1317, mean = 370
+summary(plot12) # min = 0, max = 1317, mean = 370
 stats::sd(plot12$beecount) # 380
 hist(plot12$beecount)
+
+## Plot richness
+richplot = c(118, 139, 128, 161, 155, 156, 146, 133, 107, 157)
+stats::sd(richplot)
 
 setwd("~/Dropbox/Biodiv Paper/Pinnacles_Bee_Biodiversity")
 ## Figure 2: Barplot comparisons across years
