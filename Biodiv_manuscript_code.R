@@ -2,7 +2,7 @@
 ####### Code for Pinnacles Biodiversity Paper ############
 ################# J. Meiners 2017 ########################
 
-setwd("~/Dropbox/Data")
+setwd("~/Dropbox/ResearchProjects/Biodiv Paper/Pinnacles_Bee_Biodiversity")
 library(dplyr)
 library(plyr)
 library(RColorBrewer)
@@ -10,118 +10,11 @@ library(tidyverse)
 library(reshape2)
 library(ggplot2)
 
-# load data
-Prj12 = read.csv("Project12.csv", header = TRUE)
-dim(Prj12)
-head(Prj12)
+## Figure 1: Map made in ArcGIS using the file "loc_days_species.csv"
 
-Prj56 = read.csv("Project56.csv", header = TRUE)
-dim(Prj56)
-head(Prj56)
+## Tables 1 & 2: Summary statistics of species and specimen numbers per year of study were calculated in excel using the file "Species_list.csv" (shared in Supplementary material)
 
-Prj57 = read.csv("Project57.csv", header = TRUE)
-dim(Prj57)
-head(Prj57)
-names(Prj57)
-
-# subset by year
-unique(Prj12$Yr0)
-Y88 = subset(Prj12, Yr0 == 1988 & Bee == 1)
-Y96 = subset(Prj12, Yr0 == 1996 & Bee == 1)
-Y97 = subset(Prj12, Yr0 == 1997 & Bee == 1)
-Y98 = subset(Prj12, Yr0 == 1998 & Bee == 1)
-Y99 = subset(Prj12, Yr0 == 1999 & Bee == 1)
-
-unique(Prj56$Yr0)
-Y02 = subset(Prj56, Yr0 == 2002 & Bee == 1)
-
-unique(Prj57$Yr0)
-Y11 = subset(Prj57, Yr0 == 2011 & Bee == 1)
-Y12 = subset(Prj57, Yr0 == 2012 & Bee == 1)
-
-# Number of collecting days
-unique(Y88$JD_date) # 1
-unique(Y96$JD_date) # 5
-unique(Y97$JD_date) # 50
-unique(Y98$JD_date) # 56
-unique(Y99$JD_date) # 14
-unique(Y02$JD_date) # 10
-unique(Y11$JD_date) # 58
-unique(Y12$JD_date) # 53
-
-# Number of species
-unique(Y88$SpID) # 1
-unique(Y96$SpID) # 174
-unique(Y97$SpID) # 304
-unique(Y98$SpID) # 321
-unique(Y99$SpID) # 222
-unique(Y02$SpID) # 155
-unique(Y11$SpID) # 298
-unique(Y12$SpID) # 309
-
-# Specimen totals
-sum(Y88$larger) # 1
-sum(Y96$larger) # 1362
-sum(Y97$larger) # 8077
-sum(Y98$larger) # 9382
-sum(Y99$larger) # 8234
-sum(Y02$larger) # 7255
-sum(Y11$larger) # 20351
-sum(Y12$larger) # 32438
-
-sum(sum(Y88$M) + sum(Y88$F)) # 1
-sum(sum(Y96$M) + sum(Y96$F)) # 1332
-sum(sum(Y97$M) + sum(Y97$F)) # 7931
-sum(sum(Y98$M) + sum(Y98$F)) # 8899
-sum(sum(Y99$M) + sum(Y99$F)) # 7082
-sum(sum(Y02$M) + sum(Y02$F)) # 6534
-sum(sum(Y11$M) + sum(Y11$F)) # 18536
-sum(sum(Y12$M) + sum(Y12$F)) # 27719
-
-## Calculate bee totals for most-visited plants
-Clarungi11 = subset(Y11, CONCATENATE == "Clarkia unguiculata", select = c("larger", "CONCATENATE"))
-View(Clarungi11)
-dim(Clarungi11) # 245 2
-sum(Clarungi11$larger) # 247
-
-Eriofasc12 = subset(Y12, CONCATENATE == "Eriogonum fasciculatum var.foliolosum", select = c("larger", "CONCATENATE"))
-View(Eriofasc12)
-dim(Eriofasc12) # 626 2
-sum(Eriofasc12$larger) # 644
-
-## Check locations of species new in 2011 or 2012
-Loc = subset(Prj57, GenusName == "Stelis" & Species == "chemsaki", select = c("GenusName", "Species", "Location_Name", "Location_Desc", "larger", "Yr0"))
-View(Loc)
-unique(Loc$Species)
-
-## Calculate min and max bees collected per plot sample
-plotsamp11 = subset(Prj57, Yr0 == "2011" & InfoFlag == "6" | InfoFlag == "9" | InfoFlag == "11", select = c("larger", "Location_Name", "Yr0", "JD_date"))
-dim(plotsamp11)
-plot11 = plotsamp11 %>%
-  dplyr::group_by(JD_date) %>%
-  dplyr::summarise(beecount = sum(larger))
-View(plot11)
-summary(plot11) # min = 1, max = 2088, mean = 368
-stats::sd(plot11$beecount) # 398
-hist(plot11$beecount)
-
-plotsamp12 = subset(Prj57, Yr0 == "2012" & InfoFlag == "6" | InfoFlag == "9" | InfoFlag == "11", select = c("larger", "Location_Name", "Yr0", "JD_date"))
-dim(plotsamp12)
-plot12 = plotsamp12 %>%
-  dplyr::group_by(JD_date) %>%
-  dplyr::summarise(beecount = sum(larger))
-View(plot12)
-summary(plot12) # min = 0, max = 1317, mean = 370
-stats::sd(plot12$beecount) # 380
-hist(plot12$beecount)
-
-## Plot richness
-richplot = c(118, 139, 128, 161, 155, 156, 146, 133, 107, 157)
-stats::sd(richplot)
-
-setwd("~/Dropbox/Biodiv Paper/Pinnacles_Bee_Biodiversity")
-## Figure 2: Barplot comparisons across years
-####### Fig 2a
+## Figure 2a: Barplot comparisons across years
 ## Calculate how many years each species was collected
 Species_years = read.csv("Species_list.csv", header = TRUE)
 Species_years = subset(Species_years, Num_years != "NA", select = c("Family", "Species", "Num_years"))
@@ -152,7 +45,8 @@ mtext(side = 1, line = 3.75, text = "Number of years a species was present", fon
 legend("top", names_leg, pch=15, cex = 0.9, col=brewer.pal(n = 6, name = "Set3"), bty="n", title = "Bee Families")
 dev.off() # run this line after figure code to finish saving out figure to file
 
-######## Fig 2b
+
+## Figure 2b: Family accumulation over years
 Prop_specyear <- read.csv("SpeciesinFamily_450.csv", header = TRUE, row.names = 1)
 years = c("All96", "New97", "New98", "New99", "New02", "New11", "New12")
 
@@ -174,33 +68,18 @@ legend(3.5,1.25, legend=years_leg[5], bty = "n", xpd=NA, ncol=1, pch=22, pt.bg=c
 legend(0.3,1.25, legend=years_leg[1:4], bty = "n", xpd=NA, ncol=2, pch=22, pt.bg=color.vec[1:4], pt.cex=2.5, inset=c(-0.15) ,text.font = 1, title = "Early Museum Collection Years")
 dev.off() # run this line after figure code to finish saving out figure to file
 
-## Figure 4: Dominance Graphs
-dominance = read.csv("Dominance_Genera.csv", header = TRUE, row.names = 1)
-
-10^(seq(from=-1, to=2, by=1))
-
-10^0.5
+#################### TO DO ###################### delete this line when done
+## Figure 3: Habitat type rarefaction curve
+#################### need to find and add data and code for this from other file
 
 
-dominance=dominance[order(dominance$Sum),]
-j = 0.1
-toggle=c(0, j, -2*j, -j, 0, j, 2*j, -j, 1.5*j, -j, j, 0, -j, 0.5*j, 0, -1.2*j,
-         -0.5*j, -j, 0, j, 0, 1.2*j, 0.5*j, 2*j, 0, j, -j, -0.5*j, -j, -j, 0, j,
-         -0.2*j, 0, 0, 0, j, 0, -0.2*j, 0, -0.2*j, 0, 0, 0, 0, 0, 0, 0)
-#jitter = c(toggle, rep(0, times = c(48-length(toggle))))
-
-quartz(width = 11, height = 7)
-#plot.new()
-par(mar=c(5,5,2,2)+0.1)
-plot(log10(dominance$Sum), log10(dominance$StDv), xlab = expression(Total~Abundance~(log[10]~scaled)), ylab = expression(Standard~Deviation~of~Sample~Abundances~(log[10]~scaled)), pch=19, col=gray(level=0.20, alpha=0.5), axes=F, xlim=c(0,4.25), cex=0.7)
-axis(side = 2, at=seq(from=-1, to=2, by=1), labels = 10^(seq(from=-1, to=2, by=1)))
-axis(side = 1, at=seq(from=0, to=4, by=1), labels = 10^(seq(from=0, to=4, by=1)))
-text(log10(dominance$Sum), c(log10(dominance$StDv)+toggle), row.names(dominance), cex=0.75, pos=4, col="black")
-box(which="plot")
+## Table 3: full data for these rank abundance summaries is shared in Supplementary material
 
 
+## Figure 4: Map made in ARCGis using data from file "Study_comparison.csv"
 
-#### Figure 6: Study comparison (Data from Table S1) ## Clean this up to only what is necessary for fig.
+
+#### Figure 5: Study comparison (Data from Table S1) ## Clean this up to only what is necessary for fig.
 
 surveys = read.csv("Study_comparison.csv", header = TRUE) # may need to add 'stringsAsFactors = FALSE' if not importing correctly
 names(surveys)
