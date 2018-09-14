@@ -68,10 +68,22 @@ legend(3.5,1.25, legend=years_leg[5], bty = "n", xpd=NA, ncol=1, pch=22, pt.bg=c
 legend(0.3,1.25, legend=years_leg[1:4], bty = "n", xpd=NA, ncol=2, pch=22, pt.bg=color.vec[1:4], pt.cex=2.5, inset=c(-0.15) ,text.font = 1, title = "Early Museum Collection Years")
 dev.off() # run this line after figure code to finish saving out figure to file
 
-#################### TO DO ###################### delete this line when done
-## Figure 3: Habitat type rarefaction curve
-#################### need to find and add data and code for this from other file
 
+## Figure 3: Habitat type rarefaction curve
+samples = read.csv("samples.csv", header = TRUE, row.names = 1)
+## Species accumulation curve
+quartz(height = 6, width = 10)
+## observed curve
+accumcurve = specaccum(samples, method = "rarefaction")
+plot(accumcurve, ci.type="poly", col = "black", lwd=2, ci.lty=0, ci.col="grey", ylab = "Number of species", xlab = "Number of samples")
+## expected curve for comparison
+accumcurve.random = specaccum(samples, "random")
+plot(accumcurve.random, col="blue", add=TRUE)
+
+## run to save figure as tiff file
+tiff(filename = "Biodiv_Fig3.tiff", units = "in", compression = "lzw", res = 300, width = 10, height = 6)
+# (run code script here)
+dev.off() # then run this line after figure code to finish saving out figure to file
 
 ## Table 3: full data for these rank abundance summaries is shared in Supplementary material
 
@@ -79,7 +91,7 @@ dev.off() # run this line after figure code to finish saving out figure to file
 ## Figure 4: Map made in ARCGis using data from file "Study_comparison.csv"
 
 
-#### Figure 5: Study comparison (Data from Table S1) ## Clean this up to only what is necessary for fig.
+#### Figure 5: Study comparison (Data from Table S1)
 
 surveys = read.csv("Study_comparison.csv", header = TRUE) # may need to add 'stringsAsFactors = FALSE' if not importing correctly
 names(surveys)
