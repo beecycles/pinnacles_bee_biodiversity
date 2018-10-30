@@ -10,6 +10,7 @@ library(tidyverse)
 library(reshape2)
 library(ggplot2)
 library(extrafont)
+library(vegan)
 # font_import() # this takes a while so only run it if making figures to export with Arial font
 loadfonts() # Adds fonts for PDF graphics only
 library(showtext)
@@ -80,13 +81,18 @@ dev.off() # run this line after figure code to finish saving out figure to file
 ## Figure 3: Habitat type rarefaction curve
 samples = read.csv("samples.csv", header = TRUE, row.names = 1)
 ## Species accumulation curve
-quartz(height = 6, width = 10)
 ## observed curve
 accumcurve = specaccum(samples, method = "rarefaction")
-plot(accumcurve, ci.type="poly", col = "black", lwd=2, ci.lty=0, ci.col="grey", ylab = "Number of species", xlab = "Number of samples")
+# quartz(height = 6, width = 10)
+## Fig save for journal specs
+postscript("Fig3.eps", width = 10, height = 6, horizontal = FALSE, onefile = FALSE, paper = "special", colormodel = "cmyk", family = "Arial")
+par(mai=c(1, 1, 0.8, 0.2))
+plot(accumcurve, ci.type="poly", col = "black", lwd=2, ci.lty=0, ci.col="grey", ylab = "Number of bee species found", xlab = "Number of plot samples in recent survey", cex = 0.8, cex.lab = 1.3, font.lab =2)
 ## expected curve for comparison
 accumcurve.random = specaccum(samples, "random")
 plot(accumcurve.random, col="blue", add=TRUE)
+
+dev.off()
 
 ## run to save figure as tiff file
 tiff(filename = "Biodiv_Fig3.tiff", units = "in", compression = "lzw", res = 300, width = 10, height = 6)
