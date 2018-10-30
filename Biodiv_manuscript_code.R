@@ -53,7 +53,7 @@ color.vec = brewer.pal(n = 7, name = "YlGnBu")
 # bitmap("Fig2.tiff", height = 12, width = 17, units = "cm", type = "tifflzw", res = 300)
 loadfonts(device = "postscript")
 postscript("Fig2.eps", width = 12, height = 18, horizontal = FALSE, onefile = FALSE, paper = "special", colormodel = "cmyk", family = "Arial")
-par(mfrow=c(2,1), omi=c(1, 0.8, 0.5, 0))
+par(mfrow=c(2,1), omi=c(1, 0.8, 0.2, 0))
 
 # Fig 2a: Species per year in each family
 par(mai=c(1.8, 0.5, 0.5, 0.2))
@@ -61,6 +61,7 @@ barplot(spyears, beside = TRUE, col=brewer.pal(n = 6, name = "Set3"))
 mtext(side = 2, line = 2.75, text = "Number of species", font = 2, cex = 2)
 mtext(side = 1, line = 3.75, text = "Number of years a species was present", font = 2, cex = 2)
 legend("top", names_leg, pch=15, cex = 1.3, col=brewer.pal(n = 6, name = "Set3"), title = "Bee Families")
+mtext("a", side = 1, line = 4, at = -2, cex = 3.5, font = 2)
 
 ## Figure 2b: Family accumulation over years
 par(mai=c(0.5, 0.5, 1.8, 0.2))
@@ -71,6 +72,7 @@ years_leg = c("1996", "1997", "1998", "1999", "2002", "2011", "2012")
 legend(4.35, 1.16, legend=years_leg[6:7], xpd=NA, ncol=2, pch=22, pt.bg=color.vec[6:7], pt.cex=3, text.font = 1, title = "Recent Collection Years")
 legend(3.6,1.16, legend=years_leg[5], xpd=NA, ncol=1, pch=22, pt.bg=color.vec[5], pt.cex=3,  text.font = 1, title = "Bowl Study")
 legend(1.5,1.16, legend=years_leg[1:4], xpd=NA, ncol=4, pch=22, pt.bg=color.vec[1:4], pt.cex=3,  text.font = 1, title = "Early Museum Collection Years")
+mtext("b", side = 1, line = 4, at = -0.2, cex = 3.5, font = 2)
 
 dev.off() # run this line after figure code to finish saving out figure to file
 
