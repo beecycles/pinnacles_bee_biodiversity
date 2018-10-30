@@ -83,7 +83,7 @@ samples = read.csv("samples.csv", header = TRUE, row.names = 1)
 ## Species accumulation curve
 ## observed curve
 accumcurve = specaccum(samples, method = "rarefaction")
-# quartz(height = 6, width = 10)
+quartz(height = 6, width = 10)
 ## Fig save for journal specs
 postscript("Fig3.eps", width = 10, height = 6, horizontal = FALSE, onefile = FALSE, paper = "special", colormodel = "cmyk", family = "Arial")
 par(mai=c(1, 1, 0.8, 0.2))
@@ -106,7 +106,6 @@ dev.off() # then run this line after figure code to finish saving out figure to 
 
 
 #### Figure 5: Study comparison (Data from Table S1)
-
 surveys = read.csv("Study_comparison.csv", header = TRUE) # may need to add 'stringsAsFactors = FALSE' if not importing correctly
 names(surveys)
 dim(surveys)
@@ -121,8 +120,8 @@ text("topright", paste("R2=",round(summary(lin_mod)$ r.squared, digits=3), sep="
 text(topright, paste("p-value=",round(summary(lin_mod)$ coefficients[[2,4]], digits=3), sep=""))
 mtext("Linear model", line = 1, font=2)
 
-plot(bee$Species ~ log(bee$Area), las=1, pch=19, col = pinn_col)
-log_mod = lm(bee$Species ~ log(bee$Area))
+plot(surveys$Species ~ log(surveys$Area), las=1, pch=19, col = pinn_col)
+log_mod = lm(surveys$Species ~ log(surveys$Area))
 abline(log_mod)
 text(x=2.5, y=600, paste("R2=",round(summary(log_mod)$ r.squared, digits=3), sep=""))
 text(x=2.5, y=550, paste("p-value=",round(summary(log_mod)$ coefficients[[2,4]], digits=3), sep=""))
@@ -151,7 +150,7 @@ beta = power_mod$coefficients
 area_range = seq(from = min(surveys$Area), to = max(surveys$Area), length.out=300)
 pred_species = exp(beta[1]+beta[2]*log(area_range))
 
-quartz(width=11, height=6)
+quartz(width=10, height=6)
 par(mfrow=c(1,2))
 par(mar=c(5.5, 5, 2, 2)+0.1)
 surveys_col = rep("gray20", times = length(surveys[,1]))
@@ -169,21 +168,24 @@ box(which="plot")
 legend("topright", legend = c("> predicted", "< predicted"), pch=22, pt.bg = c("gray80", "gray20"), pt.cex=2, inset=0.05, bty='n')
 axis(side = 1, at = seq(from = 0.75, by = 1.2, length.out=length(surveys[,1])), labels=FALSE)
 
+#### Fig save for journal specs
+postscript("Fig5.eps", width = 10, height = 6, horizontal = FALSE, onefile = FALSE, paper = "special", colormodel = "cmyk", family = "Arial")
+
 par(mfrow=c(1,2))
 par(mar=c(5.5, 5, 2, 2)+0.1)
 surveys_col = rep("gray20", times = length(surveys[,1]))
 surveys_col[which(percent_deviation_A>0)]="gray80"
-plot(log(surveys$Species) ~ log(surveys$Area), las=1, pch=21, bg = surveys_col, ylab="log_e(Number of species)", xlab="log_e(Area (sq. km.))")
+plot(log(surveys$Species) ~ log(surveys$Area), las=1, pch=21, bg = surveys_col, ylab="log_e(Number of species)", xlab="log_e(Area (sq. km.))", cex.lab = 1.2, font.lab = 2)
 points(x = log(surveys$Area), y = predict(power_mod), type='l', lwd=2)
 points(x = log(surveys$Area)[which(surveys$Study=="Pinnacles National Park, CA")],
        y = log(surveys$Species)[which(surveys$Study=="Pinnacles National Park, CA")],
-       pch=21, cex=3)
+       pch=21, cex=3, col = "red")
 
 par(mar=c(15, 6, 2, 2)+0.1)
-barplot(height = percent_deviation, las=2, names.arg = surveys$Study[sort_order], yaxs = 'r', ylab = "Observed relative to predicted\nspecies per area (%)", col = bar_col)
+barplot(height = percent_deviation, las=2, names.arg = surveys$Study[sort_order], yaxs = 'r', ylab = "Observed relative to predicted\nspecies per area (%)", col = bar_col, cex.lab = 1.2, font.lab = 2, border = c("red", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black"))
 abline(h=0)
 box(which="plot")
 legend("topright", legend = c("> predicted", "< predicted"), pch=22, pt.bg = c("gray80", "gray20"), pt.cex=2, inset=0.05, bty='n')
 axis(side = 1, at = seq(from = 0.75, by = 1.2, length.out=length(surveys[,1])), labels=FALSE)
 
-
+dev.off()
