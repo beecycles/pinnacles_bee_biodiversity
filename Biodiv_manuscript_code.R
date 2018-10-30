@@ -216,6 +216,7 @@ betas
 # Plot a regression line showing log relationship plotted along non-transformed data above
 divmod_predict = exp(betas[1]+betas[2]*log(floral_range))
 points(divmod_predict ~ floral_range, type = "l")
+mtext("a", side = 1, line = 3, at = -1, cex = 2, font = 2)
 
 ###### Linear Regression of FlorDiv and bee sqrtAbundance
 rich_abun = lm(flor_rich$sqrtAbun ~ flor_rich$floralRichness)
@@ -233,7 +234,7 @@ betas
 # Plot a regression line showing log relationship plotted along non-transformed data above
 divmod_predict = exp(betas[1]+betas[2]*log(floral_range))
 points(divmod_predict ~ floral_range, type = "l")
-
+mtext("b", side = 1, line = 3, at = -1, cex = 2, font = 2)
 
 # format figure for journal
 postscript("S1Fig.eps", width = 10, height = 5.5, horizontal = FALSE, onefile = FALSE, paper = "special", colormodel = "cmyk", family = "Arial")
