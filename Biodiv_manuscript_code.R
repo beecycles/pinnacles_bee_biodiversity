@@ -169,23 +169,72 @@ legend("topright", legend = c("> predicted", "< predicted"), pch=22, pt.bg = c("
 axis(side = 1, at = seq(from = 0.75, by = 1.2, length.out=length(surveys[,1])), labels=FALSE)
 
 #### Fig save for journal specs
-postscript("Fig5.eps", width = 10, height = 6, horizontal = FALSE, onefile = FALSE, paper = "special", colormodel = "cmyk", family = "Arial")
+postscript("Fig5.eps", width = 10, height = 5.5, horizontal = FALSE, onefile = FALSE, paper = "special", colormodel = "cmyk", family = "Arial")
 
 par(mfrow=c(1,2))
-par(mar=c(5.5, 5, 2, 2)+0.1)
+par(mar=c(7, 5, 3, 2)+0.1)
 surveys_col = rep("gray20", times = length(surveys[,1]))
 surveys_col[which(percent_deviation_A>0)]="gray80"
-plot(log(surveys$Species) ~ log(surveys$Area), las=1, pch=21, bg = surveys_col, ylab="log_e(Number of species)", xlab="log_e(Area (sq. km.))", cex.lab = 1.2, font.lab = 2)
+plot(log(surveys$Species) ~ log(surveys$Area), las=1, pch=21, bg = surveys_col, ylab="ln (Number of bee species)", xlab="ln (Area surveyed (sq.km.))", cex.lab = 1.2, font.lab = 2)
 points(x = log(surveys$Area), y = predict(power_mod), type='l', lwd=2)
 points(x = log(surveys$Area)[which(surveys$Study=="Pinnacles National Park, CA")],
        y = log(surveys$Species)[which(surveys$Study=="Pinnacles National Park, CA")],
        pch=21, cex=3, col = "red")
+mtext("a", side = 1, line = 5, at = 1.5, cex = 2, font = 2)
 
-par(mar=c(15, 6, 2, 2)+0.1)
-barplot(height = percent_deviation, las=2, names.arg = surveys$Study[sort_order], yaxs = 'r', ylab = "Observed relative to predicted\nspecies per area (%)", col = bar_col, cex.lab = 1.2, font.lab = 2, border = c("red", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black"))
+par(mar=c(12, 6, 3, 2)+0.1)
+barplot(height = percent_deviation, las=2, names.arg = surveys$Study[sort_order], cex.names = 0.75, yaxs = 'r', ylab = "Observed relative to predicted\nspecies per area (%)", col = bar_col, cex.lab = 1.2, font.lab = 2, border = c("red", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black", "black"))
 abline(h=0)
 box(which="plot")
 legend("topright", legend = c("> predicted", "< predicted"), pch=22, pt.bg = c("gray80", "gray20"), pt.cex=2, inset=0.05, bty='n')
 axis(side = 1, at = seq(from = 0.75, by = 1.2, length.out=length(surveys[,1])), labels=FALSE)
+mtext("b", side = 1, line = 10, at = -3, cex = 2, font = 2)
 
+dev.off()
+
+
+#### S1 Fig
+# load data on floral richness per plot sample
+flor_rich = read.csv("floral_richness.csv", header = TRUE)
+dim(flor_rich)
+
+quartz(width = 10, height = 5.5)
+par(mfrow=c(1,2), omi=c(0.2, 0.3, 0, 0))
+## Linear Regression of FlorDiv and bee Richness
+rich_rich = lm(flor_rich$beeRichness ~ flor_rich$floralRichness)
+summary(rich_rich)
+plot(beeRichness ~ floralRichness, data=flor_rich, col="black", pch=19, cex = 0.8, xlab= "Number of floral taxa", ylab= "Number of bee species", las=1, cex.lab = 1.2, font.lab = 2)
+#abline(diversity)
+text(x = c(12,12), y = c(62,56), labels=c("r2 = 0.37", "p < 0.001"))
+# Build power model of Floral Richnes ~ Bee Richness
+rich_rich_powerlog = lm(log(beeRichness) ~ log(floralRichness), data=flor_rich)
+summary(rich_rich_powerlog)
+floral_range = seq(from=min(na.omit(flor_rich$floralRichness)), to=max(na.omit(flor_rich$floralRichness)), by=1)
+floral_range
+betas = coefficients(rich_rich_powerlog)
+betas
+# Plot a regression line showing log relationship plotted along non-transformed data above
+divmod_predict = exp(betas[1]+betas[2]*log(floral_range))
+points(divmod_predict ~ floral_range, type = "l")
+
+###### Linear Regression of FlorDiv and bee sqrtAbundance
+rich_abun = lm(flor_rich$sqrtAbun ~ flor_rich$floralRichness)
+summary(rich_abun)
+plot(sqrtAbun ~ floralRichness, data=flor_rich, col="black", pch=19, cex = 0.8, xlab= "Number of floral taxa", ylab= "sqrt (Bee abundance)", las=1, cex.lab = 1.2, font.lab = 2)
+#abline(diversity)
+text(x = c(12,12), y = c(34,31), labels=c("r2 = 0.16", "p < 0.001"))
+# Build power model of Floral Richnes ~ Bee Abundance
+rich_abun_powerlog = lm(log(sqrtAbun) ~ log(floralRichness), data=flor_rich)
+summary(rich_abun_powerlog)
+floral_range = seq(from=min(na.omit(flor_rich$floralRichness)), to=max(na.omit(flor_rich$floralRichness)), by=1)
+floral_range
+betas = coefficients(rich_abun_powerlog)
+betas
+# Plot a regression line showing log relationship plotted along non-transformed data above
+divmod_predict = exp(betas[1]+betas[2]*log(floral_range))
+points(divmod_predict ~ floral_range, type = "l")
+
+
+# format figure for journal
+postscript("S1Fig.eps", width = 10, height = 5.5, horizontal = FALSE, onefile = FALSE, paper = "special", colormodel = "cmyk", family = "Arial")
 dev.off()
