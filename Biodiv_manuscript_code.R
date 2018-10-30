@@ -9,12 +9,19 @@ library(RColorBrewer)
 library(tidyverse)
 library(reshape2)
 library(ggplot2)
+library(extrafont)
+# font_import() # this takes a while so only run it if making figures to export with Arial font
+loadfonts() # Adds fonts for PDF graphics only
+library(showtext)
+## add the Arial font
+font_add("Arial", regular = "arial.ttf",
+         bold = "arialbd.ttf", italic = "ariali.ttf", bolditalic = "arialbi.ttf")
 
 ## Figure 1: Map made in ArcGIS using the file "loc_days_species.csv"
 
 ## Tables 1 & 2: Summary statistics of species and specimen numbers per year of study were calculated in excel using the file "Species_list.csv" (shared in Supplementary material)
 
-## Figure 2a: Barplot comparisons across years
+## Figure 2a prep: Barplot comparisons across years
 ## Calculate how many years each species was collected
 Species_years = read.csv("Species_list.csv", header = TRUE)
 Species_years = subset(Species_years, Num_years != "NA", select = c("Family", "Species", "Num_years"))
@@ -30,42 +37,41 @@ fam_num = Species_years %>%
 spyears <- dcast(fam_years, Family~Num_years, value.var="count")
 spyears = spyears %>% remove_rownames %>% column_to_rownames(var="Family")
 spyears[is.na(spyears)] <- 0
-
-# par(mfrow=c(2,1))
-# quartz(width = 4.5, height = 6)
-quartz(width = 9, height = 5)
-# par(mar=c(5,4.5,5.5,4)) 
-###### Side by side barplot #######
-tiff(filename = "Biodiv_Fig2a.tiff", units = "in", compression = "lzw", res = 300, width = 9, height = 5)
 spyears = as.matrix(spyears)
 names_leg=c("Andrenidae (N = 97)", "Apidae (N = 122)" , "Colletidae (N = 21)", "Halictidae (N = 60)", "Megachilidae (N = 148)", "Melittidae (N = 2)")
-barplot(spyears, beside = TRUE, col=brewer.pal(n = 6, name = "Set3"))
-mtext(side = 2, line = 2.75, text = "Number of species", font = 2)
-mtext(side = 1, line = 3.75, text = "Number of years a species was present", font = 2)
-legend("top", names_leg, pch=15, cex = 0.9, col=brewer.pal(n = 6, name = "Set3"), bty="n", title = "Bee Families")
-dev.off() # run this line after figure code to finish saving out figure to file
 
-
-## Figure 2b: Family accumulation over years
+# Fig 2b prep
 Prop_specyear <- read.csv("SpeciesinFamily_450.csv", header = TRUE, row.names = 1)
 years = c("All96", "New97", "New98", "New99", "New02", "New11", "New12")
-
 prop_years = Prop_specyear[,years]/rowSums(Prop_specyear[,years])
 totals = rowSums(Prop_specyear[,years])
-
-quartz(width = 9, height = 5)
-# par(mar=c(5,4.5,5.5,4)) 
-tiff(filename = "Biodiv_Fig2b.tiff", units = "in", compression = "lzw", res = 300, width = 9, height = 5)
 color.vec = brewer.pal(n = 7, name = "YlGnBu")
-barplot(t(prop_years), las=1, col=color.vec,
-             names=c("Andrenidae \n (N = 97)", "Apidae \n (N = 122)" , "Colletidae \n (N = 21)", "Halictidae \n (N = 60)", "Megachilidae \n (N = 148)", "Melittidae \n (N = 2)"))
-mtext(side = 2, line = 2.75, text = "Proportion of total species collected", font = 2)
-mtext(side = 1, line = 3.75, text = "Bee Family \n (N = total species collected)", font = 2)
 
+# Figure 2 plotting (a and b)
+
+###### Side by side barplot #######
+# bitmap("Fig2.tiff", height = 12, width = 17, units = "cm", type = "tifflzw", res = 300)
+loadfonts(device = "postscript")
+postscript("Fig2.eps", width = 12, height = 18, horizontal = FALSE, onefile = FALSE, paper = "special", colormodel = "cmyk", family = "Arial")
+par(mfrow=c(2,1), omi=c(1, 0.8, 0.5, 0))
+
+# Fig 2a: Species per year in each family
+par(mai=c(1.8, 0.5, 0.5, 0.2))
+barplot(spyears, beside = TRUE, col=brewer.pal(n = 6, name = "Set3"))
+mtext(side = 2, line = 2.75, text = "Number of species", font = 2, cex = 2)
+mtext(side = 1, line = 3.75, text = "Number of years a species was present", font = 2, cex = 2)
+legend("top", names_leg, pch=15, cex = 1.3, col=brewer.pal(n = 6, name = "Set3"), title = "Bee Families")
+
+## Figure 2b: Family accumulation over years
+par(mai=c(0.5, 0.5, 1.8, 0.2))
+barplot(t(prop_years), las=1, col=color.vec, names=c("Andrenidae \n (N = 97)", "Apidae \n (N = 122)" , "Colletidae \n (N = 21)", "Halictidae \n (N = 60)", "Megachilidae \n (N = 148)", "Melittidae \n (N = 2)"))
+mtext(side = 2, line = 2.75, text = "Proportion of total species collected", font = 2, cex = 2)
+mtext(side = 1, line = 3.75, text = "Bee Family (N = total species collected)", font = 2, cex = 2)
 years_leg = c("1996", "1997", "1998", "1999", "2002", "2011", "2012")
-legend(5, 1.25, legend=years_leg[6:7], bty = "n",  xpd=NA, ncol=1, pch=22, pt.bg=color.vec[6:7], pt.cex=2.5, inset=c(-0.15) ,text.font = 1, title = "Current Collection Years")
-legend(3.5,1.25, legend=years_leg[5], bty = "n", xpd=NA, ncol=1, pch=22, pt.bg=color.vec[5], pt.cex=2.5, inset=c(-0.15) ,text.font = 1, title = "Bowl Study")
-legend(0.3,1.25, legend=years_leg[1:4], bty = "n", xpd=NA, ncol=2, pch=22, pt.bg=color.vec[1:4], pt.cex=2.5, inset=c(-0.15) ,text.font = 1, title = "Early Museum Collection Years")
+legend(4.35, 1.16, legend=years_leg[6:7], xpd=NA, ncol=2, pch=22, pt.bg=color.vec[6:7], pt.cex=3, text.font = 1, title = "Recent Collection Years")
+legend(3.6,1.16, legend=years_leg[5], xpd=NA, ncol=1, pch=22, pt.bg=color.vec[5], pt.cex=3,  text.font = 1, title = "Bowl Study")
+legend(1.5,1.16, legend=years_leg[1:4], xpd=NA, ncol=4, pch=22, pt.bg=color.vec[1:4], pt.cex=3,  text.font = 1, title = "Early Museum Collection Years")
+
 dev.off() # run this line after figure code to finish saving out figure to file
 
 

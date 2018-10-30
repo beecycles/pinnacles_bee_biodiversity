@@ -1,0 +1,579 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%DocumentNeededResources: font ArialMT
+%%+ font Arial-BoldMT
+%%+ font Arial-ItalicMT
+%%+ font Arial-BoldItalicMT
+%%+ font Symbol
+%%Title: R Graphics Output
+%%Creator: R Software
+%%Pages: (atend)
+%%BoundingBox: 0 0 864 1296
+%%EndComments
+%%BeginProlog
+/bp  { gs gs } def
+% begin .ps.prolog
+/gs  { gsave } bind def
+/gr  { grestore } bind def
+/ep  { showpage gr gr } bind def
+/m   { moveto } bind def
+/l  { rlineto } bind def
+/np  { newpath } bind def
+/cp  { closepath } bind def
+/f   { fill } bind def
+/o   { stroke } bind def
+/c   { newpath 0 360 arc } bind def
+/r   { 4 2 roll moveto 1 copy 3 -1 roll exch 0 exch rlineto 0 rlineto -1 mul 0 exch rlineto closepath } bind def
+/p1  { stroke } bind def
+/p2  { gsave bg fill grestore newpath } bind def
+/p3  { gsave bg fill grestore stroke } bind def
+/p6  { gsave bg eofill grestore newpath } bind def
+/p7  { gsave bg eofill grestore stroke } bind def
+/t   { 5 -2 roll moveto gsave rotate
+       1 index stringwidth pop
+       mul neg 0 rmoveto show grestore } bind def
+/ta  { 4 -2 roll moveto gsave rotate show } bind def
+/tb  { 2 -1 roll 0 rmoveto show } bind def
+/cl  { grestore gsave newpath 3 index 3 index moveto 1 index
+       4 -1 roll lineto  exch 1 index lineto lineto
+       closepath clip newpath } bind def
+/rgb { setrgbcolor } bind def
+/s   { scalefont setfont } bind def
+% end   .ps.prolog
+%%IncludeResource: font ArialMT
+/ArialMT findfont
+dup length dict begin
+  {1 index /FID ne {def} {pop pop} ifelse} forall
+  /Encoding ISOLatin1Encoding def
+  currentdict
+  end
+/Font1 exch definefont pop
+%%IncludeResource: font Arial-BoldMT
+/Arial-BoldMT findfont
+dup length dict begin
+  {1 index /FID ne {def} {pop pop} ifelse} forall
+  /Encoding ISOLatin1Encoding def
+  currentdict
+  end
+/Font2 exch definefont pop
+%%IncludeResource: font Arial-ItalicMT
+/Arial-ItalicMT findfont
+dup length dict begin
+  {1 index /FID ne {def} {pop pop} ifelse} forall
+  /Encoding ISOLatin1Encoding def
+  currentdict
+  end
+/Font3 exch definefont pop
+%%IncludeResource: font Arial-BoldItalicMT
+/Arial-BoldItalicMT findfont
+dup length dict begin
+  {1 index /FID ne {def} {pop pop} ifelse} forall
+  /Encoding ISOLatin1Encoding def
+  currentdict
+  end
+/Font4 exch definefont pop
+%%IncludeResource: font Symbol
+/Symbol findfont
+dup length dict begin
+  {1 index /FID ne {def} {pop pop} ifelse} forall
+  currentdict
+  end
+/Font5 exch definefont pop
+%%EndProlog
+%%Page: 1 1
+bp
+57.60 666.00 864.00 1260.00 cl
+/bg { 0.3318 0 0.0569 0.1725 setcmykcolor
+ } def
+0 0 0 1 setcmykcolor
+
+0.75 setlinewidth
+[] 0 setdash
+1 setlinecap
+1 setlinejoin
+10.00 setmiterlimit
+121.60 799.84 14.58 301.38 r p3
+/bg { 0 0 0.2980 0 setcmykcolor
+ } def
+136.18 799.84 14.58 357.19 r p3
+/bg { 0.1284 0.1468 0 0.1451 setcmykcolor
+ } def
+150.77 799.84 14.58 44.65 r p3
+/bg { 0 0.4900 0.5458 0.0157 setcmykcolor
+ } def
+165.35 799.84 14.58 111.62 r p3
+/bg { 0.3934 0.1611 0 0.1725 setcmykcolor
+ } def
+179.93 799.84 14.58 245.57 r p3
+/bg { 0 0.2885 0.6126 0.0078 setcmykcolor
+ } def
+194.52 799.84 14.58 0.00 r p3
+/bg { 0.3318 0 0.0569 0.1725 setcmykcolor
+ } def
+223.68 799.84 14.58 178.59 r p3
+/bg { 0 0 0.2980 0 setcmykcolor
+ } def
+238.27 799.84 14.58 178.59 r p3
+/bg { 0.1284 0.1468 0 0.1451 setcmykcolor
+ } def
+252.85 799.84 14.58 11.16 r p3
+/bg { 0 0.4900 0.5458 0.0157 setcmykcolor
+ } def
+267.43 799.84 14.58 78.13 r p3
+/bg { 0.3934 0.1611 0 0.1725 setcmykcolor
+ } def
+282.02 799.84 14.58 167.43 r p3
+/bg { 0 0.2885 0.6126 0.0078 setcmykcolor
+ } def
+296.60 799.84 14.58 0.00 r p3
+/bg { 0.3318 0 0.0569 0.1725 setcmykcolor
+ } def
+325.77 799.84 14.58 156.27 r p3
+/bg { 0 0 0.2980 0 setcmykcolor
+ } def
+340.35 799.84 14.58 212.08 r p3
+/bg { 0.1284 0.1468 0 0.1451 setcmykcolor
+ } def
+354.93 799.84 14.58 44.65 r p3
+/bg { 0 0.4900 0.5458 0.0157 setcmykcolor
+ } def
+369.52 799.84 14.58 100.46 r p3
+/bg { 0.3934 0.1611 0 0.1725 setcmykcolor
+ } def
+384.10 799.84 14.58 189.76 r p3
+/bg { 0 0.2885 0.6126 0.0078 setcmykcolor
+ } def
+398.68 799.84 14.58 0.00 r p3
+/bg { 0.3318 0 0.0569 0.1725 setcmykcolor
+ } def
+427.85 799.84 14.58 122.78 r p3
+/bg { 0 0 0.2980 0 setcmykcolor
+ } def
+442.43 799.84 14.58 66.97 r p3
+/bg { 0.1284 0.1468 0 0.1451 setcmykcolor
+ } def
+457.02 799.84 14.58 33.49 r p3
+/bg { 0 0.4900 0.5458 0.0157 setcmykcolor
+ } def
+471.60 799.84 14.58 78.13 r p3
+/bg { 0.3934 0.1611 0 0.1725 setcmykcolor
+ } def
+486.18 799.84 14.58 212.08 r p3
+/bg { 0 0.2885 0.6126 0.0078 setcmykcolor
+ } def
+500.77 799.84 14.58 0.00 r p3
+/bg { 0.3318 0 0.0569 0.1725 setcmykcolor
+ } def
+529.93 799.84 14.58 178.59 r p3
+/bg { 0 0 0.2980 0 setcmykcolor
+ } def
+544.52 799.84 14.58 189.76 r p3
+/bg { 0.1284 0.1468 0 0.1451 setcmykcolor
+ } def
+559.10 799.84 14.58 11.16 r p3
+/bg { 0 0.4900 0.5458 0.0157 setcmykcolor
+ } def
+573.68 799.84 14.58 100.46 r p3
+/bg { 0.3934 0.1611 0 0.1725 setcmykcolor
+ } def
+588.27 799.84 14.58 200.92 r p3
+/bg { 0 0.2885 0.6126 0.0078 setcmykcolor
+ } def
+602.85 799.84 14.58 0.00 r p3
+/bg { 0.3318 0 0.0569 0.1725 setcmykcolor
+ } def
+632.02 799.84 14.58 78.13 r p3
+/bg { 0 0 0.2980 0 setcmykcolor
+ } def
+646.60 799.84 14.58 200.92 r p3
+/bg { 0.1284 0.1468 0 0.1451 setcmykcolor
+ } def
+661.18 799.84 14.58 78.13 r p3
+/bg { 0 0.4900 0.5458 0.0157 setcmykcolor
+ } def
+675.77 799.84 14.58 122.78 r p3
+/bg { 0.3934 0.1611 0 0.1725 setcmykcolor
+ } def
+690.35 799.84 14.58 212.08 r p3
+/bg { 0 0.2885 0.6126 0.0078 setcmykcolor
+ } def
+704.93 799.84 14.58 0.00 r p3
+/bg { 0.3318 0 0.0569 0.1725 setcmykcolor
+ } def
+734.10 799.84 14.58 66.97 r p3
+/bg { 0 0 0.2980 0 setcmykcolor
+ } def
+748.68 799.84 14.58 156.27 r p3
+/bg { 0.1284 0.1468 0 0.1451 setcmykcolor
+ } def
+763.27 799.84 14.58 11.16 r p3
+/bg { 0 0.4900 0.5458 0.0157 setcmykcolor
+ } def
+777.85 799.84 14.58 78.13 r p3
+/bg { 0.3934 0.1611 0 0.1725 setcmykcolor
+ } def
+792.43 799.84 14.58 424.16 r p3
+/bg { 0 0.2885 0.6126 0.0078 setcmykcolor
+ } def
+807.02 799.84 14.58 22.32 r p3
+0.00 0.00 864.00 1296.00 cl
+/Font1 findfont 12 s
+0 0 0 1 setcmykcolor
+
+165.35 769.68 (1) .5 0 t
+267.43 769.68 (2) .5 0 t
+369.52 769.68 (3) .5 0 t
+471.60 769.68 (4) .5 0 t
+573.68 769.68 (5) .5 0 t
+675.77 769.68 (6) .5 0 t
+777.85 769.68 (7) .5 0 t
+0.75 setlinewidth
+[] 0 setdash
+1 setlinecap
+1 setlinejoin
+10.00 setmiterlimit
+np
+93.60 799.84 m
+0 390.67 l
+o
+np
+93.60 799.84 m
+-7.20 0 l
+o
+np
+93.60 855.65 m
+-7.20 0 l
+o
+np
+93.60 911.46 m
+-7.20 0 l
+o
+np
+93.60 967.27 m
+-7.20 0 l
+o
+np
+93.60 1023.08 m
+-7.20 0 l
+o
+np
+93.60 1078.89 m
+-7.20 0 l
+o
+np
+93.60 1134.70 m
+-7.20 0 l
+o
+np
+93.60 1190.51 m
+-7.20 0 l
+o
+76.32 799.84 (0) .5 90 t
+76.32 855.65 (5) .5 90 t
+76.32 911.46 (10) .5 90 t
+76.32 967.27 (15) .5 90 t
+76.32 1023.08 (20) .5 90 t
+76.32 1078.89 (25) .5 90 t
+76.32 1134.70 (30) .5 90 t
+76.32 1190.51 (35) .5 90 t
+/Font2 findfont 24 s
+51.12 1009.80 (Number of species) .5 90 t
+471.60 730.08 (Number of years a species was present) .5 0 t
+93.60 795.60 849.60 1224.00 cl
+0 0 0 1 setcmykcolor
+
+0.75 setlinewidth
+[] 0 setdash
+1 setlinecap
+1 setlinejoin
+10.00 setmiterlimit
+371.13 1224.00 200.94 -149.76 r p1
+/bg { 0.3318 0 0.0569 0.1725 setcmykcolor
+ } def
+np
+ 381.66 1183.05 m
+7.02 0 l
+0 7.02 l
+-7.02 0 l
+cp p2
+/bg { 0 0 0.2980 0 setcmykcolor
+ } def
+np
+ 381.66 1164.33 m
+7.02 0 l
+0 7.02 l
+-7.02 0 l
+cp p2
+/bg { 0.1284 0.1468 0 0.1451 setcmykcolor
+ } def
+np
+ 381.66 1145.61 m
+7.02 0 l
+0 7.02 l
+-7.02 0 l
+cp p2
+/bg { 0 0.4900 0.5458 0.0157 setcmykcolor
+ } def
+np
+ 381.66 1126.89 m
+7.02 0 l
+0 7.02 l
+-7.02 0 l
+cp p2
+/bg { 0.3934 0.1611 0 0.1725 setcmykcolor
+ } def
+np
+ 381.66 1108.17 m
+7.02 0 l
+0 7.02 l
+-7.02 0 l
+cp p2
+/bg { 0 0.2885 0.6126 0.0078 setcmykcolor
+ } def
+np
+ 381.66 1089.45 m
+7.02 0 l
+0 7.02 l
+-7.02 0 l
+cp p2
+/Font1 findfont 16 s
+471.60 1205.28 (Bee Families) .5 0 t
+399.21 1180.83 (Andrenidae \(N = 97\)) 0 0 t
+399.21 1162.11 (Apidae \(N = 122\)) 0 0 t
+399.21 1143.39 (Colletidae \(N = 21\)) 0 0 t
+399.21 1124.67 (Halictidae \(N = 60\)) 0 0 t
+399.21 1105.95 (Megachilidae \(N = 148\)) 0 0 t
+399.21 1087.23 (Melittidae \(N = 2\)) 0 0 t
+57.60 72.00 864.00 666.00 cl
+57.60 72.00 864.00 666.00 cl
+/bg { 0 0 0.2000 0 setcmykcolor
+ } def
+0 0 0 1 setcmykcolor
+
+0.75 setlinewidth
+[] 0 setdash
+1 setlinecap
+1 setlinejoin
+10.00 setmiterlimit
+121.60 112.24 100.00 118.06 r p3
+/bg { 0.1459 0 0.2275 0.0863 setcmykcolor
+ } def
+121.60 230.31 100.00 96.20 r p3
+/bg { 0.3805 0 0.0878 0.1961 setcmykcolor
+ } def
+121.60 326.51 100.00 139.93 r p3
+/bg { 0.6684 0.0714 0 0.2314 setcmykcolor
+ } def
+121.60 466.44 100.00 0.00 r p3
+/bg { 0.8490 0.2448 0 0.2471 setcmykcolor
+ } def
+121.60 466.44 100.00 26.24 r p3
+/bg { 0.7976 0.4405 0 0.3412 setcmykcolor
+ } def
+121.60 492.67 100.00 26.24 r p3
+/bg { 0.9091 0.6667 0 0.4824 setcmykcolor
+ } def
+121.60 518.91 100.00 17.49 r p3
+/bg { 0 0 0.2000 0 setcmykcolor
+ } def
+241.60 112.24 100.00 128.64 r p3
+/bg { 0.1459 0 0.2275 0.0863 setcmykcolor
+ } def
+241.60 240.88 100.00 139.07 r p3
+/bg { 0.3805 0 0.0878 0.1961 setcmykcolor
+ } def
+241.60 379.95 100.00 62.58 r p3
+/bg { 0.6684 0.0714 0 0.2314 setcmykcolor
+ } def
+241.60 442.53 100.00 3.48 r p3
+/bg { 0.8490 0.2448 0 0.2471 setcmykcolor
+ } def
+241.60 446.01 100.00 20.86 r p3
+/bg { 0.7976 0.4405 0 0.3412 setcmykcolor
+ } def
+241.60 466.87 100.00 24.34 r p3
+/bg { 0.9091 0.6667 0 0.4824 setcmykcolor
+ } def
+241.60 491.20 100.00 45.20 r p3
+/bg { 0 0 0.2000 0 setcmykcolor
+ } def
+361.60 112.24 100.00 181.78 r p3
+/bg { 0.1459 0 0.2275 0.0863 setcmykcolor
+ } def
+361.60 294.02 100.00 161.58 r p3
+/bg { 0.3805 0 0.0878 0.1961 setcmykcolor
+ } def
+361.60 455.61 100.00 20.20 r p3
+/bg { 0.6684 0.0714 0 0.2314 setcmykcolor
+ } def
+361.60 475.81 100.00 40.40 r p3
+/bg { 0.8490 0.2448 0 0.2471 setcmykcolor
+ } def
+361.60 516.20 100.00 0.00 r p3
+/bg { 0.7976 0.4405 0 0.3412 setcmykcolor
+ } def
+361.60 516.20 100.00 0.00 r p3
+/bg { 0.9091 0.6667 0 0.4824 setcmykcolor
+ } def
+361.60 516.20 100.00 20.20 r p3
+/bg { 0 0 0.2000 0 setcmykcolor
+ } def
+481.60 112.24 100.00 183.80 r p3
+/bg { 0.1459 0 0.2275 0.0863 setcmykcolor
+ } def
+481.60 296.04 100.00 120.18 r p3
+/bg { 0.3805 0 0.0878 0.1961 setcmykcolor
+ } def
+481.60 416.22 100.00 28.28 r p3
+/bg { 0.6684 0.0714 0 0.2314 setcmykcolor
+ } def
+481.60 444.50 100.00 28.28 r p3
+/bg { 0.8490 0.2448 0 0.2471 setcmykcolor
+ } def
+481.60 472.78 100.00 28.28 r p3
+/bg { 0.7976 0.4405 0 0.3412 setcmykcolor
+ } def
+481.60 501.05 100.00 21.21 r p3
+/bg { 0.9091 0.6667 0 0.4824 setcmykcolor
+ } def
+481.60 522.26 100.00 14.14 r p3
+/bg { 0 0 0.2000 0 setcmykcolor
+ } def
+601.60 112.24 100.00 203.48 r p3
+/bg { 0.1459 0 0.2275 0.0863 setcmykcolor
+ } def
+601.60 315.72 100.00 151.89 r p3
+/bg { 0.3805 0 0.0878 0.1961 setcmykcolor
+ } def
+601.60 467.62 100.00 14.33 r p3
+/bg { 0.6684 0.0714 0 0.2314 setcmykcolor
+ } def
+601.60 481.95 100.00 8.60 r p3
+/bg { 0.8490 0.2448 0 0.2471 setcmykcolor
+ } def
+601.60 490.55 100.00 11.46 r p3
+/bg { 0.7976 0.4405 0 0.3412 setcmykcolor
+ } def
+601.60 502.01 100.00 17.20 r p3
+/bg { 0.9091 0.6667 0 0.4824 setcmykcolor
+ } def
+601.60 519.20 100.00 17.20 r p3
+/bg { 0 0 0.2000 0 setcmykcolor
+ } def
+721.60 112.24 100.00 424.16 r p3
+/bg { 0.1459 0 0.2275 0.0863 setcmykcolor
+ } def
+721.60 536.40 100.00 0.00 r p3
+/bg { 0.3805 0 0.0878 0.1961 setcmykcolor
+ } def
+721.60 536.40 100.00 0.00 r p3
+/bg { 0.6684 0.0714 0 0.2314 setcmykcolor
+ } def
+721.60 536.40 100.00 0.00 r p3
+/bg { 0.8490 0.2448 0 0.2471 setcmykcolor
+ } def
+721.60 536.40 100.00 0.00 r p3
+/bg { 0.7976 0.4405 0 0.3412 setcmykcolor
+ } def
+721.60 536.40 100.00 0.00 r p3
+/bg { 0.9091 0.6667 0 0.4824 setcmykcolor
+ } def
+721.60 536.40 100.00 0.00 r p3
+0.00 0.00 864.00 1296.00 cl
+/Font1 findfont 12 s
+0 0 0 1 setcmykcolor
+
+171.60 96.48 (Andrenidae ) .5 0 t
+171.60 82.08 ( \(N = 97\)) .5 0 t
+291.60 96.48 (Apidae ) .5 0 t
+291.60 82.08 ( \(N = 122\)) .5 0 t
+411.60 96.48 (Colletidae ) .5 0 t
+411.60 82.08 ( \(N = 21\)) .5 0 t
+531.60 96.48 (Halictidae ) .5 0 t
+531.60 82.08 ( \(N = 60\)) .5 0 t
+651.60 96.48 (Megachilidae ) .5 0 t
+651.60 82.08 ( \(N = 148\)) .5 0 t
+771.60 96.48 (Melittidae ) .5 0 t
+771.60 82.08 ( \(N = 2\)) .5 0 t
+0.75 setlinewidth
+[] 0 setdash
+1 setlinecap
+1 setlinejoin
+10.00 setmiterlimit
+np
+93.60 112.24 m
+0 424.16 l
+o
+np
+93.60 112.24 m
+-7.20 0 l
+o
+np
+93.60 197.07 m
+-7.20 0 l
+o
+np
+93.60 281.90 m
+-7.20 0 l
+o
+np
+93.60 366.74 m
+-7.20 0 l
+o
+np
+93.60 451.57 m
+-7.20 0 l
+o
+np
+93.60 536.40 m
+-7.20 0 l
+o
+79.20 107.95 (0.0) 1 0 t
+79.20 192.78 (0.2) 1 0 t
+79.20 277.61 (0.4) 1 0 t
+79.20 362.44 (0.6) 1 0 t
+79.20 447.27 (0.8) 1 0 t
+79.20 532.10 (1.0) 1 0 t
+/Font2 findfont 24 s
+51.12 322.20 (Proportion of total species collected) .5 90 t
+471.60 42.48 (Bee Family \(N = total species collected\)) .5 0 t
+536.60 604.27 133.01 -43.20 r p1
+/bg { 0.7976 0.4405 0 0.3412 setcmykcolor
+ } def
+555.74 568.29 14.36 14.36 r p3
+/bg { 0.9091 0.6667 0 0.4824 setcmykcolor
+ } def
+604.03 568.29 14.36 14.36 r p3
+/Font1 findfont 12 s
+538.75 589.87 (Recent Collection Y) 0 ta
+-1.104 (ears) tb gr
+573.72 571.17 (2011) 0 0 t
+622.00 571.17 (2012) 0 0 t
+461.60 604.27 65.42 -43.20 r p1
+/bg { 0.8490 0.2448 0 0.2471 setcmykcolor
+ } def
+471.09 568.29 14.36 14.36 r p3
+494.31 589.87 (Bowl Study) .5 0 t
+489.07 571.17 (2002) 0 0 t
+251.60 604.27 198.55 -43.20 r p1
+/bg { 0 0 0.2000 0 setcmykcolor
+ } def
+255.22 568.29 14.36 14.36 r p3
+/bg { 0.1459 0 0.2275 0.0863 setcmykcolor
+ } def
+303.51 568.29 14.36 14.36 r p3
+/bg { 0.3805 0 0.0878 0.1961 setcmykcolor
+ } def
+351.80 568.29 14.36 14.36 r p3
+/bg { 0.6684 0.0714 0 0.2314 setcmykcolor
+ } def
+400.09 568.29 14.36 14.36 r p3
+267.19 589.87 (Early Museum Collection Y) 0 ta
+-1.104 (ears) tb gr
+273.20 571.17 (1996) 0 0 t
+321.49 571.17 (1997) 0 0 t
+369.78 571.17 (1998) 0 0 t
+418.06 571.17 (1999) 0 0 t
+ep
+%%Trailer
+%%Pages: 1
+%%EOF
